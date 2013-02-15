@@ -49,6 +49,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "gmetric", ["0.1.3"]               #(MIT license)
   gem.add_runtime_dependency "jiralicious", ["0.2.2"]		#(MIT license)
   gem.add_runtime_dependency "jls-grok", ["0.10.11"]            #(BSD license)
+  gem.add_runtime_dependency "kafka-rb", ["0.0.12"]
   gem.add_runtime_dependency "mail"                             #(MIT license)
   gem.add_runtime_dependency "mongo"                            #(Apache 2.0 license)
   gem.add_runtime_dependency "metriks"                          #(MIT license)
