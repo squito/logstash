@@ -26,10 +26,23 @@ class LogStash::Inputs::Kafka < LogStash::Inputs::Base
   def run(output_queue)
     @consumer.loop do |messages|
       messages.each do |msg|
-        output_queue << msg.payload
+        queue_event(msg.payload, output_queue) 
       end
     end
     finished
   end # def run
+
+  private
+  def queue_event(msg, output_queue)
+    begin
+      @codec.decode(msg) do |event|
+        decorate(event)
+        output_queue << event
+      end
+    rescue => e # parse or event creation error
+      @logger.error("Failed to create event", :message => msg, :exception => e,
+                    :backtrace => e.backtrace);
+    end
+  end
 
 end # class LogStash::Inputs::Kafka

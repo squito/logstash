@@ -8,7 +8,7 @@ class LogStash::Outputs::Kafka < LogStash::Outputs::Base
 
   config_name "kafka"
   plugin_status 0
-
+  
   # The address to connect to.
   config :host, :validate => :string, :required => true
 
@@ -29,10 +29,13 @@ class LogStash::Outputs::Kafka < LogStash::Outputs::Base
   public
   def register
     @producer = Kafka::Producer.new(:topic => @topic, :host => @host, :port => @port)
+    @codec.on_event do |event|
+      @producer.send([Kafka::Message.new(event)])
+   end
   end
 
   public
   def receive(event)
-    @producer.send([Kafka::Message.new(event.to_hash.to_json)])
+    @codec.encode(event)
   end # def receive
 end # class LogStash::Outputs::Kafka
