@@ -8,6 +8,8 @@ class LogStash::Outputs::Kafka < LogStash::Outputs::Base
 
   config_name "kafka"
   plugin_status 0
+ 
+  default :codec, "json"
   
   # The address to connect to.
   config :host, :validate => :string, :required => true
