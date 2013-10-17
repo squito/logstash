@@ -7,7 +7,7 @@ require "kafka"
 class LogStash::Outputs::Kafka < LogStash::Outputs::Base
 
   config_name "kafka"
-  plugin_status "beta"
+  plugin_status 0
 
   # The address to connect to.
   config :host, :validate => :string, :required => true

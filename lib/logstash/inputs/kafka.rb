@@ -7,7 +7,7 @@ require 'kafka'
 class LogStash::Inputs::Kafka < LogStash::Inputs::Base
   class Interrupted < StandardError; end
   config_name "kafka"
-  plugin_status "beta"
+  plugin_status 0
 
   # The address to connect to.
   config :host, :validate => :string, :default => "0.0.0.0"
